@@ -8,7 +8,7 @@ def save_doctor(db: Session, info: schema.DoctorSchema):
     db.refresh(doctor_model)
     return doctor_model
 
-def get_doctor(db: Session, id: str = None):
+def get_doctor(db: Session, id: int = None):
     if id is None:
         return db.query(models.DoctorORM).all()
     else:
@@ -16,6 +16,22 @@ def get_doctor(db: Session, id: str = None):
 
 def delete_doctor(db: Session):
     db.query(models.DoctorORM).delete()
+
+
+def get_client(db: Session, id: int = None):
+    if id is None:
+        return db.query(models.ClientORM).all()
+    else:
+        return db.query(models.ClientORM).filter(models.ClientORM.id == id).first()
+
+def save_client(db: Session, info: schema.ClientSchema):
+    client_model = models.ClientORM(**info.dict())
+    db.add(client_model)
+    db.commit()
+    db.refresh(client_model)
+    return client_model
+
+
 
 def error_message(message):
     return {

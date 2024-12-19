@@ -1,7 +1,6 @@
 from pydantic import BaseModel
 
 class DoctorSchema(BaseModel):
-    id: int
     name: str
     surname: str
     category: int
@@ -24,4 +23,22 @@ class ClientSchema(BaseModel):
         orm_mode = True
 
 class ClientDB(ClientSchema):
+    id: int
+
+class RoomSchema(BaseModel):
+    number: int
+
+    class Config:
+        orm_mode = True
+
+class RoomDB(RoomSchema):
+    id: int
+
+class AppointmentSchema(BaseModel):
+    date: int
+
+    class Config:
+        orm_mode = True
+
+class AppointmentDB(AppointmentSchema):
     id: int
